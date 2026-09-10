@@ -2,10 +2,9 @@
 #
 # Electron Detector — find Electron-based apps on macOS
 # https://github.com/macnative/electron-detector
+# https://macnative.io
 #
-# Originally published as part of:
-# https://github.com/open-saas-directory/awesome-native-macosx-apps
-# Used and extended here under the MIT License (see LICENSE).
+# Licensed under the MIT License (see LICENSE).
 
 VERSION="1.0.0"
 
@@ -247,7 +246,7 @@ if [[ "$QUIET" != true ]]; then
     echo -e "${CYAN}════════════════════════════════════════════════════════════${NC}"
     echo ""
     echo -e "${ROCKET} ${BOLD}Want native alternatives?${NC}"
-    echo -e "   Check out: ${CYAN}https://github.com/open-saas-directory/awesome-native-macosx-apps${NC}"
+    echo -e "   Check out: ${CYAN}https://macnative.io${NC}"
     echo ""
     echo -e "${GREEN}${CHECK} Native apps are:${NC}"
     echo -e "   • Faster and more responsive"

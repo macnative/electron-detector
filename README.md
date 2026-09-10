@@ -73,7 +73,7 @@ Notion                                   198M         2.2.3
 ════════════════════════════════════════════════════════════
 
 🚀 Want native alternatives?
-   Check out: https://github.com/open-saas-directory/awesome-native-macosx-apps
+   Check out: https://macnative.io
 
 ✓ Native apps are:
    • Faster and more responsive
@@ -153,7 +153,7 @@ If either is present, the app is running on Electron — full stop. This is the 
 
 None of this means Electron apps are *bad* — it's a reasonable trade-off for developers shipping cross-platform software fast. But if you're stacking up a dozen of them, your battery and fans will notice. Once you know which apps are Electron, you can make that call for yourself.
 
-Found some? Browse [**awesome-native-macosx-apps**](https://github.com/open-saas-directory/awesome-native-macosx-apps) for native replacements.
+Found some? Browse [**macnative.io**](https://macnative.io) for a curated directory of native macOS replacements.
 
 ## Requirements
 
@@ -179,7 +179,7 @@ Contributions are very welcome — new detection rules, bug fixes, and general p
 
 ## Credits
 
-Electron Detector was originally published as a script inside [**open-saas-directory/awesome-native-macosx-apps**](https://github.com/open-saas-directory/awesome-native-macosx-apps) and is maintained here as a standalone tool, under the same MIT License.
+Electron Detector is built and maintained by [**macnative**](https://macnative.io) — a directory of fast, native, non-Electron alternatives to the apps cluttering your Mac. Visit [macnative.io](https://macnative.io) to find one for every Electron app this tool flags.
 
 ## License
 
