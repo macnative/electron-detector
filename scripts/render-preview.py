@@ -18,9 +18,11 @@ svg = [
     '<text x="550" y="33" text-anchor="middle" fill="#a5b6aa" font-family="monospace" font-size="13">electron-detector.sh --demo</text>',
 ]
 for i, line in enumerate(lines):
-    color = '#bce6ad' if any(t in line for t in [
-        'ELECTRON DETECTOR', 'YOUR MAC', 'THE LINEUP', 'Bundle footprint', 'Keep the apps', '[#'
-    ]) else '#dce5dc'
+    color = '#67d6ec' if any(t in line for t in ['╭', '│', '╰', '📦']) else '#dce5dc'
+    if any(t in line for t in ['⚡ Electron apps', '💡', 'DEMO /']):
+        color = '#e5ca83'
+    if any(t in line for t in ['✓', '✨']):
+        color = '#bce6ad'
     if 'DEMO /' in line:
         color = '#e5ca83'
     svg.append(f'<text x="24" y="{77 + i * 24}" xml:space="preserve" fill="{color}" font-family="Menlo,Consolas,monospace" font-size="16">{html.escape(line)}</text>')

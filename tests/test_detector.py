@@ -1,5 +1,8 @@
 """Integration tests against real macOS utilities and the system Bash 3.2."""
 import json
+import fcntl
+import struct
+import termios
 import os
 from pathlib import Path
 import plistlib
@@ -104,6 +107,52 @@ class DetectorTests(unittest.TestCase):
         self.assertEqual(self.run_script('--interactive').returncode, 2)
         self.assertEqual(self.run_script('--bogus').returncode, 2)
 
+
+    def test_progress_and_narrow_terminal(self):
+        self.app('Example')
+        for width in [90, 50]:
+            with self.subTest(width=width):
+                master, slave = pty.openpty()
+                fcntl.ioctl(slave, termios.TIOCSWINSZ, struct.pack('HHHH', 50, width, 0, 0))
+                process = subprocess.Popen(['/bin/bash', str(SCRIPT), '--path', str(self.root)],
+                                           stdin=subprocess.DEVNULL, stdout=slave, stderr=slave,
+                                           env={**os.environ, 'TERM': 'xterm', 'COLUMNS': str(width)})
+                os.close(slave)
+                output = b''
+                deadline = time.monotonic() + 10
+                try:
+                    while time.monotonic() < deadline:
+                        ready, _, _ = select.select([master], [], [], 0.1)
+                        if ready:
+                            try:
+                                chunk = os.read(master, 65536)
+                            except OSError:
+                                break
+                            if not chunk:
+                                break
+                            output += chunk
+                        elif process.poll() is not None:
+                            break
+                    process.wait(timeout=2)
+                    text = output.decode()
+                    self.assertEqual(process.returncode, 0, text)
+                    self.assertIn('100% (1/1)', text)
+                    self.assertIn('Example', text)
+                    self.assertEqual('App version' in text, width >= 68)
+                finally:
+                    if process.poll() is None:
+                        process.kill()
+                        process.wait()
+                    os.close(master)
+
+    def test_table_facts_and_long_names(self):
+        name = 'A very long app name that must remain completely visible'
+        self.app(name)
+        self.app('日本語のアプリ')
+        result = self.run_script()
+        for text in [name, '日本語のアプリ', 'App version', 'Disk size', 'Did you know?', 'Largest:']:
+            self.assertIn(text, result.stdout)
+        self.assertNotIn('Did you know?', self.run_script('--quiet').stdout)
 
     def test_demo_is_explicit_and_does_not_scan(self):
         self.app('PrivateWorkApp')

@@ -11,27 +11,30 @@
 
 # What's inside your Mac apps?
 
-A tiny shell script that finds Electron runtime markers in your installed apps. See the lineup, inspect the evidence, and find out how much disk space those **whole app bundles** occupy.
+A tiny shell script that finds Electron runtime markers in your installed apps. See a size-sorted table, inspect the evidence, and find out how much disk space those **whole app bundles** occupy.
 
 **One file. Runs with the Bash your Mac already has. No Homebrew, account, or admin password.**
 
 <p align="center">
-  <img src=".github/preview.svg" alt="Demo report: 3 of 42 example apps contain Electron markers, using 1.5 GiB of bundle disk space. Results show names, versions and detection evidence, largest first." width="880">
+  <img src=".github/preview.svg" alt="Demo report: 3 of 42 example apps contain Electron markers, using 1.5 GiB of bundle disk space. A colorful table shows names, sizes and versions, followed by disk statistics and useful facts." width="880">
 </p>
 
 *Fictional apps, real output. Reproduce this preview with `bash electron-detector.sh --demo`.*
 
 ## Try it
 
+**Preview build:** these commands download the updated script from the PR branch. The `main` branch still has v1 until this release is merged.
+
 Open **Terminal** (⌘ Space → Terminal), download the script, then inspect it in your editor:
 
 ```sh
-curl -fL https://raw.githubusercontent.com/macnative/electron-detector/main/electron-detector.sh -o electron-detector.sh
+curl -fL https://raw.githubusercontent.com/macnative/electron-detector/codex/friendly-app-census/electron-detector.sh -o electron-detector.sh
 ```
 
 Read [the source](electron-detector.sh), then run:
 
 ```sh
+bash electron-detector.sh --version  # should print 2.1.0
 bash electron-detector.sh --interactive
 ```
 
@@ -41,10 +44,10 @@ Prefer a plain report? Run `bash electron-detector.sh`. Curious about the look b
 
 Downloading needs internet. **Scanning works offline.** The script reads bundles and uses a temporary workspace that it removes on exit. It never edits, deletes, or launches your apps. The menu changes the clipboard only when you choose **c**, and opens a website only when you choose **a**. Don't use `sudo`.
 
-## A census, with a little personality
+## The original look, with better answers
 
-- **Useful at a glance.** Largest detected bundles first, with app versions and the exact marker found.
-- **A small Mac companion.** A friendly face, a count of matches, and a compact report that stays in your scrollback.
+- **Useful at a glance.** A colorful table of app names, disk sizes, and versions, largest first. The interactive menu and JSON include detection evidence.
+- **A familiar terminal report.** A boxed title, scan progress bar, disk summary, and useful facts. Narrow terminals get a compact layout; long names stay intact.
 - **Something to share.** `--share` leaves out app names and folder paths. The interactive menu can copy that summary for you.
 - **Built for real folders.** Subfolders, spaces, Unicode, symlinked apps, and overlapping scan roots; nested helper apps aren't counted again.
 - **Comfortable in a terminal or a pipeline.** JSON output, quiet mode, `NO_COLOR`, and no surprise prompts.
@@ -71,7 +74,7 @@ Explore native alternatives: https://macnative.io/categories
 
 I also make **[MacNative](https://macnative.io)**, a directory for discovering Mac apps. If a result makes you curious, [browse by category](https://macnative.io/categories) and look for a native app that fits how you work.
 
-That's the connection: this tool shows you what's installed; MacNative helps you explore what else is out there. It doesn't guarantee a replacement for every match. There are no network requests during a scan and no per-app referral links. Use `--quiet` to omit the mascot and MacNative promotion.
+That's the connection: this tool shows you what's installed; MacNative helps you explore what else is out there. It doesn't guarantee a replacement for every match. There are no network requests during a scan and no per-app referral links. Use `--quiet` to omit the banner and MacNative promotion.
 
 ## Make it yours
 
@@ -82,7 +85,7 @@ That's the connection: this tool shows you what's installed; MacNative helps you
 | `-j`, `--json` | Emits structured data, with app names but no personal folder paths |
 | `--share` | Prints a summary without app names or paths |
 | `--demo` | Shows fictional results without scanning; works with the interactive menu |
-| `-q`, `--quiet` | Omits the mascot, tips, and MacNative promotion |
+| `-q`, `--quiet` | Omits the banner, tips, and MacNative promotion |
 | `--no-color` | Disables colors; `NO_COLOR` is also respected |
 | `-u`, `--user` | Compatibility flag; user apps are now included by default |
 | `-v`, `--version` | Prints the version |
@@ -129,14 +132,14 @@ These are runtime markers, not a benchmark or an executable signature check. Ren
 
 Sizes are allocated bundle disk usage from `du -sk`, in KiB (displayed as MiB/GiB). They exclude user data and caches. APFS cloning, compression, and shared files can complicate totals. The report does not estimate RAM, battery life, speed, or space you would save by switching. Apps changing during a scan may yield partial measurements. Inaccessible folders are reported as warnings; an empty folder yields a valid zero-app report. Symlink cycles may also cause traversal warnings.
 
-Electron is a useful cross-platform framework. Keep apps that work for you. If you want software with a more native Mac feel, [browse MacNative by category](https://macnative.io/categories). A native app is not necessarily a feature-for-feature replacement.
+[Electron embeds Chromium and Node.js](https://www.electronjs.org/docs/latest/) to support cross-platform desktop applications. This is the basis of the report’s “Did you know?” fact. Keep apps that work for you. If you want software with a more native Mac feel, [browse MacNative by category](https://macnative.io/categories). A native app is not necessarily a feature-for-feature replacement.
 
 ## JSON schema v2
 
 ```json
 {
   "schema_version": 2,
-  "detector_version": "2.0.0",
+  "detector_version": "2.1.0",
   "total_apps": 1,
   "electron_count": 1,
   "total_size_kb": 409600,
