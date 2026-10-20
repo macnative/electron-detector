@@ -11,11 +11,11 @@ Find Electron apps on your Mac in a colorful table, with sizes, versions, and a 
 Open **Terminal** (⌘ Space → Terminal) and paste this whole block:
 
 ```sh
-curl -fL https://raw.githubusercontent.com/macnative/electron-detector/codex/friendly-app-census/electron-detector.sh -o electron-detector.sh &&
+curl -fL https://raw.githubusercontent.com/macnative/electron-detector/main/electron-detector.sh -o electron-detector.sh &&
   bash electron-detector.sh --interactive
 ```
 
-This downloads and runs the script. [Read the source first](electron-detector.sh) if you prefer. The command currently uses the **v2.1.0 preview branch**; `main` still has v1.
+This downloads and runs the script. [Read the source first](electron-detector.sh) if you prefer.
 
 It scans `/Applications` and `~/Applications`, then lets you **copy a summary**, **inspect detection evidence**, or **browse native alternatives**. Scanning works offline and never changes your apps.
 
