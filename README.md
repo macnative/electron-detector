@@ -1,190 +1,165 @@
 <p align="center">
-  <img src=".github/banner.svg" alt="Electron Detector" width="100%">
+  <img src=".github/banner.svg" alt="Electron Detector — A little detective for your Mac." width="880">
 </p>
 
 <p align="center">
-  <a href="https://github.com/macnative/electron-detector/actions/workflows/shellcheck.yml"><img src="https://github.com/macnative/electron-detector/actions/workflows/shellcheck.yml/badge.svg" alt="ShellCheck"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href="#requirements"><img src="https://img.shields.io/badge/platform-macOS-black?logo=apple" alt="macOS"></a>
-  <img src="https://img.shields.io/badge/bash-4%2B-4EAA25?logo=gnu-bash&logoColor=white" alt="Bash 4+">
-  <a href="https://github.com/macnative/electron-detector/stargazers"><img src="https://img.shields.io/github/stars/macnative/electron-detector?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/macnative/electron-detector/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
+  <a href="https://github.com/macnative/electron-detector/actions/workflows/shellcheck.yml">ShellCheck</a> ·
+  <a href="#try-it">Quick start</a> ·
+  <a href="#what-a-detection-means">How detection works</a> ·
+  <a href="LICENSE">MIT license</a>
 </p>
 
-<h3 align="center">Which of your "native" Mac apps are secretly running a full Chromium browser?</h3>
+# What's inside your Mac apps?
+
+A tiny shell script that finds Electron runtime markers in your installed apps. See the lineup, inspect the evidence, and find out how much disk space those **whole app bundles** occupy.
+
+**One file. Runs with the Bash your Mac already has. No Homebrew, account, or admin password.**
 
 <p align="center">
-  One command tells you. No install, no dependencies, no tracking — just a shell script that reads your <code>/Applications</code> folder.
+  <img src=".github/preview.svg" alt="Demo report: 3 of 42 example apps contain Electron markers, using 1.5 GiB of bundle disk space. Results show names, versions and detection evidence, largest first." width="880">
 </p>
 
-<p align="center"><b>
-  <code>curl -sL https://raw.githubusercontent.com/macnative/electron-detector/main/electron-detector.sh | bash</code>
-</b></p>
+*Fictional apps, real output. Reproduce this preview with `bash electron-detector.sh --demo`.*
 
----
+## Try it
 
-## Why this exists
+Open **Terminal** (⌘ Space → Terminal), download the script, then inspect it in your editor:
 
-[Electron](https://www.electronjs.org/) lets developers ship one app for every platform by bundling a full copy of Chromium and Node.js inside it. That's great for developers — and rough on your Mac. Every Electron app you run is, under the hood, its own private browser tab: its own renderer process, its own ~100–300MB of idle RAM, its own hit to battery life.
-
-Most people have no idea how many of their everyday apps work this way. **Electron Detector** scans your installed apps and tells you, in a few seconds, exactly which ones are Electron — with sizes, versions, and a straight answer on whether it's worth switching to something native.
-
-## Quick start
-
-```bash
-curl -sL https://raw.githubusercontent.com/macnative/electron-detector/main/electron-detector.sh | bash
+```sh
+curl -fL https://raw.githubusercontent.com/macnative/electron-detector/main/electron-detector.sh -o electron-detector.sh
 ```
 
-That's it — no install, no config, nothing left behind. It's a read-only scan of `/Applications`; it doesn't modify anything on your system.
+Read [the source](electron-detector.sh), then run:
 
-## Example output
-
-```
-╔════════════════════════════════════════════════════════════╗
-║  ⚡  Electron Detector for macOS                            ║
-║     Find which apps are secretly Electron-based             ║
-╚════════════════════════════════════════════════════════════╝
-
-🔍 Scanning /Applications...
-
-[▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] Done!
-
-════════════════════════════════════════════════════════════
-
-⚠️  Found 5 Electron app(s) out of 47 total apps
-
-⚡ Electron Apps Detected:
-
-App Name                                 Size         Version
-────────────────────────────────────────────────────────────────
-Slack                                    165M         4.35.0
-Discord                                  156M         0.0.290
-Visual Studio Code                       387M         1.85.0
-Postman                                  312M         10.20.0
-Notion                                   198M         2.2.3
-
-════════════════════════════════════════════════════════════
-
-📦 Resource Impact:
-
-⚠️  High Electron count detected!
-   Each Electron app runs a full Chromium browser
-
-════════════════════════════════════════════════════════════
-
-🚀 Want native alternatives?
-   Check out: https://macnative.io
-
-✓ Native apps are:
-   • Faster and more responsive
-   • Use less RAM and battery
-   • Better macOS integration
-   • Smaller app size
-
-💡 Fun Fact:
-   Electron apps can use 100-300MB RAM even when idle
-   Native apps often use less than 50MB
-
-════════════════════════════════════════════════════════════
+```sh
+bash electron-detector.sh --interactive
 ```
 
-## Features
+The scan checks `/Applications` and `~/Applications`, including subfolders. Apps don't need to be running. At the end, you can print or copy an anonymous summary, learn what the findings mean, or open MacNative to explore alternatives.
 
-- 🔎 Scans `/Applications` (and optionally `~/Applications`) for Electron apps
-- ⚡ Detects the Electron runtime via its framework bundle, not just an app name guess
-- 📊 Reports app name, disk size, and version for every match
-- 🎨 Clean, colorful terminal output — with a real progress bar, not a spinner
-- 🤖 `--json` mode for scripting, dashboards, or piping into `jq`
-- 🧠 Zero dependencies: pure Bash, nothing to install
-- 🔒 Read-only — it only inspects app bundles, it never modifies or deletes anything
+Prefer a plain report? Run `bash electron-detector.sh`. Curious about the look before scanning? Add `--demo --interactive`.
 
-## Usage
+Downloading needs internet. **Scanning works offline.** The script reads bundles and uses a temporary workspace that it removes on exit. It never edits, deletes, or launches your apps. The menu changes the clipboard only when you choose **c**, and opens a website only when you choose **a**. Don't use `sudo`.
 
-```bash
-electron-detector.sh [options]
+## A census, with a little personality
 
-Options:
-  -u, --user     Also scan ~/Applications
-  -j, --json     Output machine-readable JSON instead of the report
-  -q, --quiet    Suppress the banner and tips, print results only
-  -v, --version  Print the version number
-  -h, --help     Show this help message
+- **Useful at a glance.** Largest detected bundles first, with app versions and the exact marker found.
+- **A small Mac companion.** A friendly face, a count of matches, and a compact report that stays in your scrollback.
+- **Something to share.** `--share` leaves out app names and folder paths. The interactive menu can copy that summary for you.
+- **Built for real folders.** Subfolders, spaces, Unicode, symlinked apps, and overlapping scan roots; nested helper apps aren't counted again.
+- **Comfortable in a terminal or a pipeline.** JSON output, quiet mode, `NO_COLOR`, and no surprise prompts.
+
+No purity score. No invented RAM savings. Keep the apps you like.
+
+## Share your census
+
+```sh
+bash electron-detector.sh --share
 ```
 
-**Scan both system and user app directories:**
-
-```bash
-./electron-detector.sh --user
+```text
+My Mac app census: 3 of 42 inspected apps have Electron markers (7%).
+Detected bundles: 1.5 GiB on disk. Not a RAM or battery benchmark.
+No marker found does not prove an app is native.
+Try it: https://github.com/macnative/electron-detector
+Explore native alternatives: https://macnative.io/categories
 ```
 
-**Get JSON for scripting:**
+*Example numbers.* App names and paths are omitted, but your counts and sizes are still in the summary. Nothing is posted automatically. Full reports and screenshots include app names; review those before sharing.
 
-```bash
-./electron-detector.sh --json | jq '.electron_apps[].name'
+## Curious about alternatives?
+
+I also make **[MacNative](https://macnative.io)**, a directory for discovering Mac apps. If a result makes you curious, [browse by category](https://macnative.io/categories) and look for a native app that fits how you work.
+
+That's the connection: this tool shows you what's installed; MacNative helps you explore what else is out there. It doesn't guarantee a replacement for every match. There are no network requests during a scan and no per-app referral links. Use `--quiet` to omit the mascot and MacNative promotion.
+
+## Make it yours
+
+| Option | What it does |
+| --- | --- |
+| `-i`, `--interactive` | Offers share, clipboard, explanation, and alternatives actions after scanning |
+| `--path DIRECTORY` | Scans a custom folder; repeat for multiple folders; replaces the defaults |
+| `-j`, `--json` | Emits structured data, with app names but no personal folder paths |
+| `--share` | Prints a summary without app names or paths |
+| `--demo` | Shows fictional results without scanning; works with the interactive menu |
+| `-q`, `--quiet` | Omits the mascot, tips, and MacNative promotion |
+| `--no-color` | Disables colors; `NO_COLOR` is also respected |
+| `-u`, `--user` | Compatibility flag; user apps are now included by default |
+| `-v`, `--version` | Prints the version |
+| `-h`, `--help` | Shows help |
+
+```sh
+# Scan another app folder
+bash electron-detector.sh --path '/Volumes/Work/Applications'
+
+# Save a report for your own tools
+bash electron-detector.sh --json > electron-report.json
+
+# Just the findings
+bash electron-detector.sh --quiet --no-color
 ```
 
-## Manual installation
+`--interactive` needs terminal input and output. Use it after downloading, rather than piping the script into Bash. `--json` and `--share` are mutually exclusive; `--demo` cannot be combined with `--json` or `--path`.
 
-```bash
-git clone https://github.com/macnative/electron-detector.git
-cd electron-detector
-chmod +x electron-detector.sh
-./electron-detector.sh
+## Questions that come up
+
+**Does this tell me which apps are running right now?**  
+No. It inspects installed bundles. Use Activity Monitor for running processes, CPU, and memory.
+
+**Is the disk total space I can save?**  
+No. It's the measured size of the detected bundles, including the apps themselves. Replacement apps also use space, and user data is outside this measurement.
+
+**It missed an app.**  
+Try `--path` if it's outside the default folders. Renamed or relocated Electron internals can be missed. [Open an issue](https://github.com/macnative/electron-detector/issues) with the app version and expected marker; please leave personal paths out.
+
+**I see a partial-scan warning.**  
+Some folders or bundles couldn't be read. The results describe what was accessible. Try a smaller folder you can read; no admin access is required.
+
+**Can I remove it afterward?**  
+Yes. Delete the downloaded script and any report files you saved. There's no installer, background service, or auto-updater.
+
+## What a detection means
+
+The detector checks for either:
+
+- `Contents/Frameworks/Electron Framework.framework`
+- `Contents/MacOS/Electron`
+
+These are runtime markers, not a benchmark or an executable signature check. Renamed or relocated frameworks can be missed, and a coincidentally named file can be a false positive. A bundle may include Electron for only part of its functionality. Other web wrappers are outside this tool's scope. **No Electron marker does not mean native.**
+
+Sizes are allocated bundle disk usage from `du -sk`, in KiB (displayed as MiB/GiB). They exclude user data and caches. APFS cloning, compression, and shared files can complicate totals. The report does not estimate RAM, battery life, speed, or space you would save by switching. Apps changing during a scan may yield partial measurements. Inaccessible folders are reported as warnings; an empty folder yields a valid zero-app report. Symlink cycles may also cause traversal warnings.
+
+Electron is a useful cross-platform framework. Keep apps that work for you. If you want software with a more native Mac feel, [browse MacNative by category](https://macnative.io/categories). A native app is not necessarily a feature-for-feature replacement.
+
+## JSON schema v2
+
+```json
+{
+  "schema_version": 2,
+  "detector_version": "2.0.0",
+  "total_apps": 1,
+  "electron_count": 1,
+  "total_size_kb": 409600,
+  "unknown_sizes": 0,
+  "scan_warnings": 0,
+  "electron_apps": [
+    { "name": "Example", "size_kb": 409600, "version": "1.0", "evidence": "Electron Framework.framework" }
+  ]
+}
 ```
 
-## How it works
+`size_kb` is `null` when measurement fails. `total_size_kb` sums known sizes only. `total_apps` counts bundles with accessible Contents directories. `scan_warnings` counts traversal diagnostics and inaccessible bundles; it is not a count of missed apps. Version 2 replaces v1's string `size` with numeric `size_kb` and includes the user Applications folder by default. Errors go to stderr; JSON stdout stays machine-readable. The demo cannot export JSON, so fictional data cannot be mistaken for a real scan. Exit 0 means the scan completed (inspect warnings); 2 means invalid arguments or an unsupported platform; 1 means temporary workspace creation failed.
 
-Electron Detector doesn't guess from an app's name or icon — it looks inside the `.app` bundle for the actual Electron runtime:
+## Contributing & tests
 
-1. **Electron Framework** — `Contents/Frameworks/Electron Framework.framework`
-2. **Electron binary** — `Contents/MacOS/Electron`
+Use macOS and `/bin/bash`, not just a newer Homebrew Bash. Runtime dependencies must ship with macOS. Dev tests use Python 3; ShellCheck is optional locally and runs in CI.
 
-If either is present, the app is running on Electron — full stop. This is the same signal macOS itself uses internally to launch the app, so it's accurate even when an app hides its origins well.
-
-## Why it matters
-
-| | Electron apps | Native apps |
-|---|---|---|
-| Idle RAM | 100–300MB per app | Often under 50MB |
-| Battery impact | Higher — runs a full Chromium instance | Lower — uses native frameworks |
-| Launch time | Slower — boots a browser engine | Near-instant |
-| Disk footprint | Large (bundles Chromium + Node.js) | Small |
-| macOS integration | Approximated | Native |
-
-None of this means Electron apps are *bad* — it's a reasonable trade-off for developers shipping cross-platform software fast. But if you're stacking up a dozen of them, your battery and fans will notice. Once you know which apps are Electron, you can make that call for yourself.
-
-Found some? Browse [**macnative.io**](https://macnative.io) for a curated directory of native macOS replacements.
-
-## Requirements
-
-- macOS with Bash (ships by default)
-- Apps installed in `/Applications` or `~/Applications`
-
-## Troubleshooting
-
-**"Permission denied" when running the script directly**
-```bash
-chmod +x electron-detector.sh
+```sh
+/bin/bash -n electron-detector.sh
+python3 tests/test_detector.py
+shellcheck electron-detector.sh
 ```
 
-**Not finding an app you know is Electron**
-Some apps rename or relocate their internals. Open an issue with the app name and version and we'll add a detection rule.
+New detection rules need fixtures for both true and false positives. Don't add telemetry or unmeasured performance claims. Please remove personal information before attaching reports to issues.
 
-**Apps in unusual locations aren't scanned**
-By design, only `/Applications` and (with `--user`) `~/Applications` are scanned. This is deliberate — the script only reads standard, expected locations.
-
-## Contributing
-
-Contributions are very welcome — new detection rules, bug fixes, and general polish all help. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started, or just open an issue or PR.
-
-## Credits
-
-Electron Detector is built and maintained by [**macnative**](https://macnative.io) — a directory of fast, native, non-Electron alternatives to the apps cluttering your Mac. Visit [macnative.io](https://macnative.io) to find one for every Electron app this tool flags.
-
-## License
-
-[MIT](LICENSE) — free to use, modify, and share.
-
----
-
-<p align="center">Made with ❤️ by <a href="https://github.com/macnative">macnative</a> for people who like their Macs fast and their RAM free.</p>
+[MIT license](LICENSE).
