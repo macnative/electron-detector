@@ -97,8 +97,8 @@ if ! $json && ! $quiet && ! $share; then
         printf '\n%s  ⚡ Electron Detector%s\n  Find out what is inside your Mac apps.\n\n' "$mint" "$reset"
     else
         printf '\n%s  ╭────────────────────────────────────────────────────────────────╮\n' "$mint"
-        printf '  │  ⚡ Electron Detector for macOS                                 │\n'
-        printf '  │     Find out what is inside your Mac apps.                      │\n'
+        printf '  │  %-50s %10s │\n' 'Electron Detector for macOS' "v$VERSION"
+        printf '  │  %-62s│\n' 'Find out what is inside your Mac apps.'
         printf '  ╰────────────────────────────────────────────────────────────────╯%s\n\n' "$reset"
     fi
     if $demo; then printf '  DEMO / fictional apps and sizes. Nothing scanned.\n\n';
