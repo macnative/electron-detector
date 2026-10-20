@@ -18,6 +18,7 @@ A clear description of what went wrong.
 - Is it Electron-based? (yes/no, and how you know)
 
 **Output**
+Remove any app names or other information you do not want to share publicly. Please include the detector version (`bash electron-detector.sh --version`).
 ```
 paste the output of `./electron-detector.sh --json` or the terminal output here
 ```
