@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="290" viewBox="0 0 1200 290">
 <rect width="1200" height="290" rx="24" fill="#FFF9EF"/>
 <circle cx="1055" cy="135" r="170" fill="#E0D3F5"/>
-<g font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" fill="#35294D"><text x="265" y="88" font-size="13" letter-spacing="3">A SMALL TOOL FOR CURIOUS MAC PEOPLE</text><text x="262" y="149" font-weight="700" font-size="53" letter-spacing="-2">Electron Detector</text><text x="265" y="190" font-size="24">A little detective for your Mac.</text><text x="265" y="239" font-size="14" fill="#735B91">OPEN SOURCE  /  RUNS LOCALLY  /  MADE BY MACNATIVE</text></g><svg x="66" y="52" width="155" height="172" viewBox="0 0 280 310" fill="none" aria-label="MacNative logo">
+<g font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" fill="#35294D"><text x="265" y="88" font-size="13" letter-spacing="3">A SMALL TOOL FOR CURIOUS MAC PEOPLE</text><text x="262" y="149" font-weight="700" font-size="53" letter-spacing="-2">Electron Detector</text><text x="265" y="190" font-size="24">A little detective for your Mac.</text><text x="265" y="239" font-size="17" fill="#735B91">Made by <tspan font-weight="700" fill="#7350B5">MacNative.io</tspan><tspan dx="18" font-size="13" letter-spacing="1">OPEN SOURCE · RUNS LOCALLY</tspan></text></g><svg x="66" y="52" width="155" height="172" viewBox="0 0 280 310" fill="none" aria-label="MacNative logo">
   <title>MacNative App Drawer</title>
   <g stroke="#35294D" stroke-width="7" stroke-linejoin="round">
     <path d="M215 18 257 51Q269 60 269 78V248Q269 265 252 275L218 292 199 156Z" fill="#7350B5"/>
@@ -15,4 +15,4 @@
     <ellipse cx="154" cy="127" rx="8" ry="14"/>
   </g>
   <path d="M112 151Q123 168 135 151" stroke="#35294D" stroke-width="7" stroke-linecap="round"/>
-</svg><text x="1047" y="148" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" font-size="30" font-weight="700" letter-spacing="-0.5" fill="#35294D">MacNative.io</text></svg>
+</svg></svg>
