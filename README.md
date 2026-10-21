@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/banner.svg" alt="Electron Detector — A little detective for your Mac." width="880">
+  <img src=".github/banner-macnative.svg" alt="Electron Detector — A little detective for your Mac." width="880">
 </p>
 
 Find Electron apps on your Mac in a colorful table, with sizes, versions, and a few useful facts.
