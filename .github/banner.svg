@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="290" viewBox="0 0 1200 290">
-<rect width="1200" height="290" rx="24" fill="#f4f1e9"/>
-<circle cx="1055" cy="135" r="170" fill="#e3ebe1"/>
-<g transform="translate(70 65)"><rect width="150" height="125" rx="19" fill="#d1e9cf" stroke="#263d33" stroke-width="4"/><rect x="17" y="17" width="116" height="77" rx="10" fill="#f9fbef" stroke="#263d33" stroke-width="3"/><circle cx="53" cy="51" r="5" fill="#263d33"/><circle cx="97" cy="51" r="5" fill="#263d33"/><path d="M65 71 Q75 81 85 71" fill="none" stroke="#263d33" stroke-width="3" stroke-linecap="round"/><path d="M53 112h44M62 126v15m26-15v15M48 143h54" stroke="#263d33" stroke-width="4" stroke-linecap="round"/></g>
-<g font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" fill="#263d33"><text x="265" y="88" font-size="13" letter-spacing="3">A SMALL TOOL FOR CURIOUS MAC PEOPLE</text><text x="262" y="149" font-weight="700" font-size="53" letter-spacing="-2">Electron Detector</text><text x="265" y="190" font-size="24">A little detective for your Mac.</text><text x="265" y="239" font-size="14" fill="#526658">OPEN SOURCE  /  RUNS LOCALLY  /  MADE BY MACNATIVE</text></g><svg x="990" y="63" width="130" height="144" viewBox="0 0 280 310" fill="none" aria-label="MacNative logo">
+<rect width="1200" height="290" rx="24" fill="#FFF9EF"/>
+<circle cx="1055" cy="135" r="170" fill="#E0D3F5"/>
+<g font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" fill="#35294D"><text x="265" y="88" font-size="13" letter-spacing="3">A SMALL TOOL FOR CURIOUS MAC PEOPLE</text><text x="262" y="149" font-weight="700" font-size="53" letter-spacing="-2">Electron Detector</text><text x="265" y="190" font-size="24">A little detective for your Mac.</text><text x="265" y="239" font-size="14" fill="#735B91">OPEN SOURCE  /  RUNS LOCALLY  /  MADE BY MACNATIVE</text></g><svg x="66" y="52" width="155" height="172" viewBox="0 0 280 310" fill="none" aria-label="MacNative logo">
   <title>MacNative App Drawer</title>
   <g stroke="#35294D" stroke-width="7" stroke-linejoin="round">
     <path d="M215 18 257 51Q269 60 269 78V248Q269 265 252 275L218 292 199 156Z" fill="#7350B5"/>
